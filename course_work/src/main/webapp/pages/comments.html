@@ -133,7 +133,7 @@
                             <div class="alert alert-info">
                                 No comments yet.
                             </div>
-                            <button type="button" class="btn btn-info">New comment</button>           
+                            <button type="button" class="btn btn-info" id="new_comment">New comment</button>           
                         </div>
                         
                         <!-- .panel-body -->
@@ -143,6 +143,27 @@
             </div>
         </div>
         <!-- /#page-wrapper -->
+        <div id="myModal" class="modal fade" role="dialog">
+		  <div class="modal-dialog">
+		
+			    <!-- Modal content-->
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal">&times;</button>
+			        <h4 class="modal-title">New comment</h4>
+			      </div>
+			      <div class="modal-body">
+			        <p>  
+			        	<label for="usr">Your comment:</label>
+  						<textarea class="form-control" rows="5" id="comment"></textarea>
+  					</p>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-default" id="save_comment">Save</button>
+			      </div>
+			    </div>
+
+  			</div>
 
     </div>
     <!-- /#wrapper -->
@@ -152,6 +173,7 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/script.js"></script>
 
 </body>
 
