@@ -38,5 +38,17 @@ $(document).ready(function() {
     		minutes_played=$("#statistic #minutes_played").val("");
 		});
 	});
+    $("#new_player").click(function() {
+    	$('#add').modal('toggle');
+    	$('#add').modal('show');
+    	$("#add #add_player").click(function() {
+			var name=$("#add #name").val();
+			$('#add').modal('hide');
+			$("#table_body").append("<tr><td>"+name+"</td><td><button type='button' class='btn btn-info' id=comments_player>View comments</button></td>" +
+					"<td><button type='button' class='btn btn-success' id='tasks_player'>View tasks</button></td>" +
+					"<td><button type='button' class='btn btn-warning' id='statistic_player'>View statistic</button></td></tr>");
+    		name=$("#statistic #scored_goals").val("");
+		});
+	});
     
 });
