@@ -139,13 +139,44 @@
                                     </thead>
                                     <tbody>
                                         <tr class="odd gradeX">
-                                            <td>4</td>
-                                            <td>3</td>
-                                            <td>15</td>
+                                            <td id="goals">4</td>
+                                            <td id="assists">3</td>
+                                            <td id="minutes">15</td>
                                         </tr>
                                		</tbody>
                                	</table>
+                               	<button type="button" class="btn btn-warning" id="update_statistic">Update statistic</button>
                         </div>
+		                <div id="statistic" class="modal fade" role="dialog">
+						  <div class="modal-dialog">
+						
+							    <!-- Modal content-->
+							    <div class="modal-content">
+							      <div class="modal-header">
+							        <button type="button" class="close" data-dismiss="modal">&times;</button>
+							        <h4 class="modal-title">Update statistic</h4>
+							      </div>
+							      <div class="modal-body">
+							        <p>  
+							        	<label for="usr">Goals:</label>
+				  						<input type="text" class="form-control" id="scored_goals">
+				  					</p>
+				  					<p>  
+							        	<label for="usr">Assist:</label>
+				  						<input type="text" class="form-control" id="made_assists">
+				  					</p>
+				  					<p>  
+							        	<label for="usr">Minutes:</label>
+				  						<input type="text" class="form-control" id="minutes_played">
+				  					</p>
+							      </div>
+							      <div class="modal-footer">
+							        <button type="button" class="btn btn-default" id="update">Update</button>
+							      </div>
+							    </div>
+				
+				  			</div>
+		    			</div>
                         <!-- /.panel-body -->
                     </div>
                     <!-- /.panel -->
@@ -164,6 +195,7 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/script.js"></script>
 </body>
 
 </html>
