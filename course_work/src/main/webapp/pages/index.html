@@ -131,14 +131,12 @@
 			    </thead>
 			    <tbody id="table_body">
 			      <tr>
-			        <td id="username">Gosho</td>
-			        <td><button type="button" class="btn btn-info" id="comments_player">View comments</button></td>
-			        <td><button type="button" class="btn btn-success" id="tasks_player">View tasks</button></td>
-			        <td><button type="button" class="btn btn-warning" id="statistic_player">View statistic</button></td>
+			        <td id="username"></td>
+			        <td><a href="comments.html" role="button" class="btn btn-info" id="comments_player">View comments</a></td>
+			        <td><a href="tasks.html" role="button" class="btn btn-success" id="tasks_player">View tasks</a></td>
+			        <td><a href="statistic.html" role="button" class="btn btn-warning" id="statistic_player">View statistic</a></td>
 			      </tr>
-			      <tr>
-			    </tbody>
-			    
+			    </tbody>			    
   			</table>
   			
   			
@@ -178,9 +176,65 @@
 				      </div>
 				      <div class="modal-body">
 				        <p>  
-				        	<label for="usr">Name:</label>
+				        	<label>Name:</label>
 	  						<input type="text" class="form-control" id="name">
 	  					</p>
+	  					<p>  
+				        	<label>Country:</label>
+	  						<input type="text" class="form-control" id="country">
+	  					</p>				        
+	  					<p>  
+				        	<label>Statistics:</label>
+	  						<textarea class="form-control" rows="5" id="statistics"></textarea>
+	  					</p>
+	  					<p>  
+				        	<label>Fines:</label>
+	  						<input type="text" class="form-control" id="fines">
+	  					</p>
+	  					<p>  
+				        	<label>Violations:</label>
+	  						<textarea class="form-control" rows="5" id="violations"></textarea>
+	  					</p>
+	  					<p>  
+				        	<label>Matches:</label>
+	  						<textarea class="form-control" rows="5" id="matches"></textarea>
+	  					</p>
+	  					<p>  
+				        	<label>Notes:</label>
+	  						<input type="text" class="form-control" id="notes">
+	  					</p>
+	  					<p>  
+				        	<label>Tasks:</label>
+	  						<textarea class="form-control" rows="5" id="tasks"></textarea>
+	  					</p>
+	  					<p>  
+				        	<label>Results:</label>
+	  						<input type="text" class="form-control" id="results">
+	  					</p>
+	  					<p>  
+				        	<label>Diet:</label>
+	  						<input type="text" class="form-control" id="diets">
+	  					</p>
+	  					<p>  
+				        	<label>Transfer value:</label>
+	  						<input type="text" class="form-control" id="transfer_value">
+	  					</p>
+	  					<p>  
+				        	<label>Yellow cards:</label>
+	  						<input type="text" class="form-control" id="yellow_cards">
+	  					</p>
+	  					<p>  
+				        	<label>Red cards:</label>
+	  						<input type="text" class="form-control" id="red_cards">
+	  					</p>
+	  					<p>  
+				        	<label>Wage:</label>
+	  						<input type="text" class="form-control" id="wage">
+	  					</p>
+	  					<p>  
+				        	<label>Contract:</label>
+	  						<input type="text" class="form-control" id="contract">
+	  					</p>	  					
 				      </div>
 				      <div class="modal-footer">
 				        <button type="button" class="btn btn-default" id="add_player">Add player</button>
@@ -199,6 +253,7 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="../js/bootstrap.min.js"></script>
 	<script src="../js/script.js"></script>
+	<script type="text/javascript" src="../js/lodash-3.10.1.js"></script>
 
 </body>
 
