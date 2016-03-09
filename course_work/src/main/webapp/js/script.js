@@ -22,5 +22,21 @@ $(document).ready(function() {
     		new_training=$("#task #new_training").val("");
 		});
 	});
+    $("#update_statistic").click(function() {
+    	$('#statistic').modal('toggle');
+    	$('#statistic').modal('show');
+    	$("#statistic #update").click(function() {
+    		var scored_goals=$("#statistic #scored_goals").val();
+    		var made_assists=$("#statistic #made_assists").val();
+    		var minutes_played=$("#statistic #minutes_played").val();
+			$('#statistic').modal('hide');
+			$("#goals").append("<td>"+scored_goals+"</td>");
+			$("#assists").append("<td>"+made_assists+"</td>");
+			$("#minutes").append("<td>"+minutes_played+"</td>");
+    		scored_goals=$("#statistic #scored_goals").val("");
+    		made_assists=$("#statistic #made_assists").val("");
+    		minutes_played=$("#statistic #minutes_played").val("");
+		});
+	});
     
 });
