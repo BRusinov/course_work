@@ -21,9 +21,17 @@ $(document).ready(function() {
         });
     }
     
+    function reloadPlayers() {
+        listInformation().then(function(response) {
+            function addPlayer(player) {
+            	$("#username").text(player.username);
+            }
+            _.forEach(response, addPlayer(response));
+        });
+    }
     
     reloadComments();
-    
+    reloadPlayers();
     
     $("#new_comment").click(function() {
     	$('#myModal').modal('toggle');
