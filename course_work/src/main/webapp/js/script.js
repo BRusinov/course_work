@@ -5,7 +5,7 @@ $(document).ready(function() {
 		return PLAYER_ENDPOINT + "/" + playerId;
 	}
 	var all;
-    function listComments() {
+    function listInformation() {
         return $.ajax(playerEndpoint(1), {
             method: "GET",
             dataType: "json"
@@ -13,7 +13,7 @@ $(document).ready(function() {
     }
     
     function reloadComments() {
-        listComments().then(function(response) {
+        listInformation().then(function(response) {
             function addComment(player) {
             	$("#new_ones").text(player.notes);
             }
@@ -21,26 +21,8 @@ $(document).ready(function() {
         });
     }
     
-    function listPlayers() {
-        return $.ajax(playerEndpoint(1), {
-            method: "GET",
-            dataType: "json"
-        });
-    }
-    
-    function reloadPlayers() {
-        listComments().then(function(response) {
-            function addPlayer(player) {
-            	$("#username").text(player.username);
-            }
-//            addPlayer(response);
-//            $("#username").html("");
-            _.forEach(response, addPlayer(response));
-        });
-    }
     
     reloadComments();
-    reloadPlayers();
     
     
     $("#new_comment").click(function() {
@@ -82,20 +64,42 @@ $(document).ready(function() {
     		new_training=$("#task #new_training").val("");
 		});
 	});
-    $("#statistic_player").click(function() {
+    $("#update_statistic").click(function() {
     	$('#statistic').modal('toggle');
     	$('#statistic').modal('show');
+    	
+
     	$("#statistic #update").click(function() {
-    		var scored_goals=$("#statistic #scored_goals").val();
-    		var made_assists=$("#statistic #made_assists").val();
-    		var minutes_played=$("#statistic #minutes_played").val();
-			$('#statistic').modal('hide');
-			$("#goals").append("<td>"+scored_goals+"</td>");
-			$("#assists").append("<td>"+made_assists+"</td>");
-			$("#minutes").append("<td>"+minutes_played+"</td>");
-    		scored_goals=$("#statistic #scored_goals").val("");
-    		made_assists=$("#statistic #made_assists").val("");
-    		minutes_played=$("#statistic #minutes_played").val("");
+    		
+    		all=$.ajax(playerEndpoint(1), {
+        		method: "GET",
+        		dataType: "json"
+        	}).then(function(response) {
+        		var scored_goals=$("#statistic #scored_goals").val();
+        		var made_assists=$("#statistic #made_assists").val();
+        		var minutes_played=$("#statistic #minutes_played").val(); 	   	
+        		alert(response.statistics.goals);
+        		response.statistics={
+        				goals:scored_goals,
+        				assists:made_assists,
+        				minutes:minutes_played
+        		};
+        		$.ajax(playerEndpoint(1), {
+      			   method: "PUT",
+      			   dataType: "json",
+      			   data: JSON.stringify(response),
+      			   contentType: "application/json; charset=utf-8"
+         		});
+        		$('#statistic').modal('hide');
+    			$("#goals").text(response.statistics.goals);
+    			$("#assists").text(response.statistics.assists);
+    			$("#minutes").text(response.statistics.minutes);
+        		scored_goals=$("#statistic #scored_goals").val("");
+        		made_assists=$("#statistic #made_assists").val("");
+        		minutes_played=$("#statistic #minutes_played").val("");
+			});
+//    		alert(scored_goals);
+
 		});
 	});
     $("#new_player").click(function() {
