@@ -49,7 +49,11 @@ $(document).ready(function() {
     }
     
     function reloadStatistics() {
-        listInformation().then(function(response) {
+    	var id;
+    	if(window.location.href.indexOf("statisticsPlayer") != -1)
+    	      id = window.location.href.substr(window.location.href.indexOf("statisticsPlayer")+"statisticsPlayer".length +1)
+    	else return null;
+        listInformation(id).then(function(response) {
             function updateStatistics(player) {
             	$("#goals").text(player.statistics.goals);
             	$("#assists").text(player.statistics.assists);
@@ -90,6 +94,13 @@ $(document).ready(function() {
     $(document).on("click", "#comments_player", function(e){
         e.preventDefault();
         var object = {"commentsPlayer": $(this).attr("data-playerId")}
+        
+        window.location = $(this).attr("href") + "?" + $.param(object, true);
+    });
+    
+    $(document).on("click", "#statistic_player", function(e){
+        e.preventDefault();
+        var object = {"statisticsPlayer": $(this).attr("data-playerId")}
         
         window.location = $(this).attr("href") + "?" + $.param(object, true);
     });
