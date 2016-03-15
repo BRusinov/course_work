@@ -129,43 +129,19 @@
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                             <div class="dataTable_wrapper">
-                                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                <table class="table table-striped table-bordered table-hover">
                                     <thead>
                                         <tr>
-                                            <th>Goals</th>
-                                            <th>Assists</th>
-                                            <th>Minutes</th>
-                                            <th>Fines</th>
-                                            <th>Violations</th>
-                                            <th>Matches</th>
-                                            <th>Notes</th>
-                                            <th>Tasks</th>
-                                            <th>Results</th>
-                                            <th>Diet</th>
-                                            <th>Transfer value</th>
-                                            <th>Yellow cards</th>
-                                            <th>Red cards</th>
-                                            <th>Wage</th>
-                                            <th>Contract</th>
+                                            <th>Name</th>
+                                            <th>Country</th>
+                                            <th>Age</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="coach_table_body">
                                         <tr class="odd gradeX">
-                                            <td>4</td>
-                                            <td>3</td>
-                                            <td>15</td>
-                                            <td>30</td>
-                                            <td>0</td>
-                                            <td>12</td>
-                                            <td>0</td>
-                                            <td>2</td>
-                                            <td>5/6</td>
-                                            <td>Eat vegetables</td>
-                                            <td>30</td>
-                                            <td>2</td>
-                                            <td>0</td>
-                                            <td>100</td>
-                                            <td>2016-06-02</td>
+                                            <td id="coach_name"></td>
+                                            <td id="coach_country"></td>
+                                            <td id="coach_age"></td>
                                         </tr>
                                		</tbody>
                                	</table>
@@ -188,6 +164,8 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/profile.js"></script>
+	<script type="text/javascript" src="../js/lodash-3.10.1.js"></script>
 </body>
 
 </html>
