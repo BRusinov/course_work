@@ -26,12 +26,7 @@ $(document).ready(function() {
     }
     reloadStatistics();
     
-    $(document).on("click", "#statistic_player", function(e){
-        e.preventDefault();
-        var object = {"statisticsPlayer": $(this).attr("data-playerId")}
-        
-        window.location = $(this).attr("href") + "?" + $.param(object, true);
-    });
+
     $("#update_statistic").click(function() {
     	$('#statistic').modal('toggle');
     	$('#statistic').modal('show');
