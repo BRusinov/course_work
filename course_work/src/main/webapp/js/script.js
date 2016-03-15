@@ -1,6 +1,7 @@
 $(document).ready(function() {
     "use strict";
     var PLAYER_ENDPOINT = "http://localhost:3000/Regular_user";
+    var COACH_ENDPOINT = "http://localhost:3000/Super_user";
     
 	function playerEndpoint(playerId) {
 		return PLAYER_ENDPOINT + "/" + playerId;
@@ -63,34 +64,22 @@ $(document).ready(function() {
         });
     }
     
-    reloadComments();
-    reloadPlayers();
-    reloadStatistics();
+    function showTeam(){
+    	$.ajax(COACH_ENDPOINT, {
+    		method: "GET",
+    		dataType: "json"
+    	}).then(function(response) {
+//    		console.log(response.username);
+    		function showTeam(coach){
+    			alert(coach.username);
+    			$("#coach_name").text(coach.username);
+    		}
+            $(response).each(function(index, team){
+            	showTeam(team);
+           });
+    	});
+    }
     
-    $("#new_comment").click(function() {
-    	$('#myModal').modal('toggle');
-    	$('#myModal').modal('show');
-    	
-    	$("#myModal #save_comment").click(function() {
-    		all=$.ajax(playerEndpoint(1), {
-        		method: "GET",
-        		dataType: "json"
-        	}).then(function(response) {
-        		var new_comment=$("#myModal #comment").val();
-    			response.notes=new_comment;
-        		$('#myModal').modal('hide');
-    			new_comment=$("#myModal #comment").val("");
-    			$("#new_ones").text(response.notes);
-        		console.log(response);
-        		$.ajax(playerEndpoint(1), {
-     			   method: "PUT",
-     			   dataType: "json",
-     			   data: JSON.stringify(response),
-     			   contentType: "application/json; charset=utf-8"
-        		});
-        	});
-		});
-	});
     $(document).on("click", "#comments_player", function(e){
         e.preventDefault();
         var object = {"commentsPlayer": $(this).attr("data-playerId")}
@@ -105,6 +94,8 @@ $(document).ready(function() {
         window.location = $(this).attr("href") + "?" + $.param(object, true);
     });
     
+    reloadComments();
+    reloadPlayers();
     $("#new_task").click(function() {
     	$('#task').modal('toggle');
     	$('#task').modal('show');
@@ -116,39 +107,6 @@ $(document).ready(function() {
 			$("#training").append("<p>"+new_training+"</p>");
     		new_matches=$("#task #new_matches").val("");
     		new_training=$("#task #new_training").val("");
-		});
-	});
-    $("#update_statistic").click(function() {
-    	$('#statistic').modal('toggle');
-    	$('#statistic').modal('show');
-    	$("#statistic #update").click(function() {
-    		all=$.ajax(playerEndpoint(1), {
-        		method: "GET",
-        		dataType: "json"
-        	}).then(function(response) {
-        		var scored_goals=$("#statistic #scored_goals").val();
-        		var made_assists=$("#statistic #made_assists").val();
-        		var minutes_played=$("#statistic #minutes_played").val(); 	   	
-        		response.statistics={
-        				goals:scored_goals,
-        				assists:made_assists,
-        				minutes:minutes_played
-        		};
-        		$.ajax(playerEndpoint(1), {
-      			   method: "PUT",
-      			   dataType: "json",
-      			   data: JSON.stringify(response),
-      			   contentType: "application/json; charset=utf-8"
-         		});
-        		$('#statistic').modal('hide');
-    			$("#goals").text(response.statistics.goals);
-    			$("#assists").text(response.statistics.assists);
-    			$("#minutes").text(response.statistics.minutes);
-        		scored_goals=$("#statistic #scored_goals").val("");
-        		made_assists=$("#statistic #made_assists").val("");
-        		minutes_played=$("#statistic #minutes_played").val("");
-			});
-
 		});
 	});
     $("#new_player").click(function() {
@@ -208,6 +166,11 @@ $(document).ready(function() {
     	    	      });
 			name=$("#statistic #scored_goals").val("");
     	});
+	});
+    
+    $("#coach").click(function() {
+    	alert("here");
+    	showTeam();
 	});
    
 });
