@@ -1,12 +1,13 @@
 $(document).ready(function() {
     "use strict";
     var PLAYER_ENDPOINT = "http://localhost:3000/Regular_user";
+    
 	function playerEndpoint(playerId) {
 		return PLAYER_ENDPOINT + "/" + playerId;
 	}
 	var all;
-    function listInformation() {
-        return $.ajax(playerEndpoint(1), {
+    function listInformation(id) {
+        return $.ajax(playerEndpoint(id), {
             method: "GET",
             dataType: "json"
         });
@@ -20,7 +21,12 @@ $(document).ready(function() {
     }
     
     function reloadComments() {
-        listInformation().then(function(response) {
+    	var id;
+    	if(window.location.href.indexOf("commentsPlayer") != -1)
+    	      id = window.location.href.substr(window.location.href.indexOf("commentsPlayer")+"commentsPlayer".length +1)
+    	else return null;
+    	alert(id);
+        listInformation(id).then(function(response) {
             function addComment(player) {
             	$("#new_ones").text(player.notes);
             }
@@ -31,9 +37,9 @@ $(document).ready(function() {
     function reloadPlayers() {
         listAll().then(function(response) {
             function addPlayer(player) {
-    			$("#table_body").append("<tr><td>"+player.username+"</td><td><a href='comments.html' role='button' class='btn btn-info' id=comments_player>View comments</a></td>" +
-    					"<td><a href='tasks.html' role='button' class='btn btn-success' id='tasks_player'>View tasks</a></td>" +
-    					"<td><a href='statistic.html' role='button' class='btn btn-warning' id='statistic_player'>View statistic</a></td></tr>");
+    			$("#table_body").append("<tr><td>"+player.username+"</td><td><a href='comments.html' role='button' class='btn btn-info' id='comments_player' data-playerId="+player.id+">View comments</a></td>" +
+    					"<td><a href='tasks.html' role='button' class='btn btn-success' id='tasks_player' data-playerId="+player.id+">View tasks</a></td>" +
+    					"<td><a href='statistic.html' role='button' class='btn btn-warning' id='statistic_player' data-playerId="+player.id+">View statistic</a></td></tr>");
             }
             console.log(response);
             $(response).each(function(index, player){
@@ -81,6 +87,12 @@ $(document).ready(function() {
         	});
 		});
 	});
+    $(document).on("click", "#comments_player", function(e){
+        e.preventDefault();
+        var object = {"commentsPlayer": $(this).attr("data-playerId")}
+        
+        window.location = $(this).attr("href") + "?" + $.param(object, true);
+    });
     
     $("#new_task").click(function() {
     	$('#task').modal('toggle');
