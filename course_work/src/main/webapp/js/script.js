@@ -20,21 +20,6 @@ $(document).ready(function() {
             dataType: "json"
         });
     }
-    
-    function reloadComments() {
-    	var id;
-    	if(window.location.href.indexOf("commentsPlayer") != -1)
-    	      id = window.location.href.substr(window.location.href.indexOf("commentsPlayer")+"commentsPlayer".length +1)
-    	else return null;
-    	alert(id);
-        listInformation(id).then(function(response) {
-            function addComment(player) {
-            	$("#new_ones").text(player.notes);
-            }
-            addComment(response);
-        });
-    }
-    
     function reloadPlayers() {
         listAll().then(function(response) {
             function addPlayer(player) {
@@ -48,22 +33,6 @@ $(document).ready(function() {
                });
         });
     }
-    
-    function reloadStatistics() {
-    	var id;
-    	if(window.location.href.indexOf("statisticsPlayer") != -1)
-    	      id = window.location.href.substr(window.location.href.indexOf("statisticsPlayer")+"statisticsPlayer".length +1)
-    	else return null;
-        listInformation(id).then(function(response) {
-            function updateStatistics(player) {
-            	$("#goals").text(player.statistics.goals);
-            	$("#assists").text(player.statistics.assists);
-            	$("#minutes").text(player.statistics.minutes);
-            }
-            _.forEach(response, updateStatistics(response));
-        });
-    }
-    
     function showTeam(){
     	$.ajax(COACH_ENDPOINT, {
     		method: "GET",
