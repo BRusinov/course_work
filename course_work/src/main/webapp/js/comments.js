@@ -50,10 +50,5 @@ $(document).ready(function() {
 		});
 	});
     
-    $(document).on("click", "#comments_player", function(e){
-        e.preventDefault();
-        var object = {"commentsPlayer": $(this).attr("data-playerId")}
-        
-        window.location = $(this).attr("href") + "?" + $.param(object, true);
-    });
+
 });
