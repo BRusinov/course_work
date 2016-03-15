@@ -33,22 +33,6 @@ $(document).ready(function() {
                });
         });
     }
-    function showTeam(){
-    	$.ajax(COACH_ENDPOINT, {
-    		method: "GET",
-    		dataType: "json"
-    	}).then(function(response) {
-//    		console.log(response.username);
-    		function showTeam(coach){
-    			alert(coach.username);
-    			$("#coach_name").text(coach.username);
-    		}
-            $(response).each(function(index, team){
-            	showTeam(team);
-           });
-    	});
-    }
-    
     $(document).on("click", "#comments_player", function(e){
         e.preventDefault();
         var object = {"commentsPlayer": $(this).attr("data-playerId")}
@@ -133,11 +117,6 @@ $(document).ready(function() {
     	    	      });
 			name=$("#statistic #scored_goals").val("");
     	});
-	});
-    
-    $("#coach").click(function() {
-    	alert("here");
-    	showTeam();
 	});
    
 });
