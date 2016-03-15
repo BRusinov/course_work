@@ -30,8 +30,20 @@ $(document).ready(function() {
         });
     }
     
+    function reloadStatistics() {
+        listInformation().then(function(response) {
+            function updateStatistics(player) {
+            	$("#goals").text(player.statistics.goals);
+            	$("#assists").text(player.statistics.assists);
+            	$("#minutes").text(player.statistics.minutes);
+            }
+            _.forEach(response, updateStatistics(response));
+        });
+    }
+    
     reloadComments();
     reloadPlayers();
+    reloadStatistics();
     
     $("#new_comment").click(function() {
     	$('#myModal').modal('toggle');
@@ -54,7 +66,6 @@ $(document).ready(function() {
      			   data: JSON.stringify(response),
      			   contentType: "application/json; charset=utf-8"
         		});
-//        		reloadComments();
         	});
 		});
 	});
@@ -75,10 +86,7 @@ $(document).ready(function() {
     $("#update_statistic").click(function() {
     	$('#statistic').modal('toggle');
     	$('#statistic').modal('show');
-    	
-
     	$("#statistic #update").click(function() {
-    		
     		all=$.ajax(playerEndpoint(1), {
         		method: "GET",
         		dataType: "json"
@@ -86,7 +94,6 @@ $(document).ready(function() {
         		var scored_goals=$("#statistic #scored_goals").val();
         		var made_assists=$("#statistic #made_assists").val();
         		var minutes_played=$("#statistic #minutes_played").val(); 	   	
-        		alert(response.statistics.goals);
         		response.statistics={
         				goals:scored_goals,
         				assists:made_assists,
@@ -106,7 +113,6 @@ $(document).ready(function() {
         		made_assists=$("#statistic #made_assists").val("");
         		minutes_played=$("#statistic #minutes_played").val("");
 			});
-//    		alert(scored_goals);
 
 		});
 	});
