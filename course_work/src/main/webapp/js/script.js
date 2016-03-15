@@ -12,6 +12,13 @@ $(document).ready(function() {
         });
     }
     
+    function listAll(){
+        return $.ajax(PLAYER_ENDPOINT, {
+            method: "GET",
+            dataType: "json"
+        });
+    }
+    
     function reloadComments() {
         listInformation().then(function(response) {
             function addComment(player) {
@@ -22,11 +29,16 @@ $(document).ready(function() {
     }
     
     function reloadPlayers() {
-        listInformation().then(function(response) {
+        listAll().then(function(response) {
             function addPlayer(player) {
-            	$("#username").text(player.username);
+    			$("#table_body").append("<tr><td>"+player.username+"</td><td><a href='comments.html' role='button' class='btn btn-info' id=comments_player>View comments</a></td>" +
+    					"<td><a href='tasks.html' role='button' class='btn btn-success' id='tasks_player'>View tasks</a></td>" +
+    					"<td><a href='statistic.html' role='button' class='btn btn-warning' id='statistic_player'>View statistic</a></td></tr>");
             }
-            _.forEach(response, addPlayer(response));
+            console.log(response);
+            $(response).each(function(index, player){
+                	addPlayer(player);
+               });
         });
     }
     
@@ -122,7 +134,9 @@ $(document).ready(function() {
     	$("#add #add_player").click(function() {
 			var name=$("#add #name").val();
 			var country=$("#add #country").val();
-			var statistics=$("#add #statistics").val();
+			var goals=$("#add #new_goals").val();
+			var assists=$("#add #new_assists").val();
+			var minutes=$("#add #new_minutes").val();
 			var fines=$("#add #fines").val();
 			var violations=$("#add #violations").val();
 			var matches=$("#add #matches").val();
@@ -142,7 +156,11 @@ $(document).ready(function() {
         	var player = {
     	    	      	username: name,
     	    	      	country:country,
-    	    	      	statistics:statistics,
+    	    	      	statistics:{
+    	    	      		goals:goals,
+    	    	      		assists:assists,
+    	    	      		minutes:minutes
+    	    	      	},
     	    	      	fines:fines,
     	    	      	violations:violations,
     	    	      	matches:matches,
