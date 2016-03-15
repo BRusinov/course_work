@@ -42,7 +42,6 @@
 	],
 	"Super_user" : [
 		{
-			"couch_id":1,
 			"username": "penata",
 			"country": "bulgaria",
 			"age": 41
@@ -51,11 +50,6 @@
 	],
 	"Team": [
 		{
-			"coach_id": 1,
-			"players":
-			[
-				1
-			],
 			"scored_goals": 31,
 			"goals_conceded": 18,
 			"position": 2,
