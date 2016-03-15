@@ -62,8 +62,6 @@ $(document).ready(function() {
         
         window.location = $(this).attr("href") + "?" + $.param(object, true);
     });
-    
-    reloadComments();
     reloadPlayers();
     $("#new_task").click(function() {
     	$('#task').modal('toggle');
