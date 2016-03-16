@@ -42,6 +42,7 @@
 	],
 	"Super_user" : [
 		{
+			"couch_id":1,
 			"username": "penata",
 			"country": "bulgaria",
 			"age": 41
@@ -55,7 +56,7 @@
 			"position": 2,
 			"participation":
 			{
-				"Champions League": 2,
+				"Champions_League": 2,
 				"Cup": 1
 			},
 			"matches":
