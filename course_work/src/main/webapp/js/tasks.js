@@ -34,9 +34,26 @@ $(document).ready(function() {
     	$("#task #save_task").click(function() {
     		var new_matches=$("#task #new_matches").val();
     		var new_training=$("#task #new_training").val();
+    		var new_array=[new_matches,new_training];
+    		var matchToString=new_array[0].toString();
+    		var trainingToString=new_array[1].toString();
+    		all=$.ajax(playerEndpoint(1), {
+        		method: "GET",
+        		dataType: "json"
+        	}).then(function(response) {
+        		response.tasks[0]=matchToString;
+        		response.tasks[1]=trainingToString;
+        		$.ajax(playerEndpoint(1), {
+      			   method: "PUT",
+      			   dataType: "json",
+      			   data: JSON.stringify(response),
+      			   contentType: "application/json; charset=utf-8"
+         		});
+    			$("#match").text(response.tasks[0]);
+    			$("#training").text(response.tasks[1]);
+        	});
 			$('#task').modal('hide');
-			$("#match").append("<p>"+new_matches+"</p>");
-			$("#training").append("<p>"+new_training+"</p>");
+
     		new_matches=$("#task #new_matches").val("");
     		new_training=$("#task #new_training").val("");
 		});
