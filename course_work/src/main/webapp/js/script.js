@@ -46,6 +46,14 @@ $(document).ready(function() {
         
         window.location = $(this).attr("href") + "?" + $.param(object, true);
     });
+    
+    $(document).on("click", "#tasks_player", function(e){
+        e.preventDefault();
+        var object = {"tasksPlayer": $(this).attr("data-playerId")}
+        
+        window.location = $(this).attr("href") + "?" + $.param(object, true);
+    });
+    
     reloadPlayers();
     $("#new_task").click(function() {
     	$('#task').modal('toggle');
