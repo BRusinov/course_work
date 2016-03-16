@@ -150,7 +150,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="statistic.html">
+                        <a href="#" id="team_details">
                             <div class="panel-footer">
                                 <span class="pull-left">View Details</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -247,8 +247,54 @@
 
   				</div>
   			</div>
-    </div>
+  			
+  			<div id="view" class="modal fade" role="dialog">
+		  		<div class="modal-dialog">
+		
+			    <!-- Modal content-->
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal">&times;</button>
+				        <h4 class="modal-title">Team statistics</h4>
+				      </div>
+				      <div class="modal-body">
+				        <p>  
+				        	<label>Scored goals:</label>
+	  						<input type="text" class="form-control" id="team_goals">
+	  					</p>
+	  					<p>  
+				        	<label>Goals conceded:</label>
+	  						<input type="text" class="form-control" id="team_conceded">
+	  					</p>				        
+	  					<p>  
+				        	<label>Position:</label>
+	  						<input type="text" class="form-control" id="team_position">
+	  					</p>
+	  					<p>  
+				        	<label>Champions league:</label>
+	  						<input type="text" class="form-control" id="champions_league">
+	  					</p>
+	  					<p>  
+				        	<label>Cup:</label>
+	  						<input type="text" class="form-control" id="cup">
+	  					</p>
+	  					<p>  
+				        	<label>Matches:</label>
+	  						<textarea class="form-control" rows="3" id="team_matches"></textarea>
+	  					</p>					
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-default" id="back">Back</button>
+				      </div>
+				    </div>
 
+  				</div>
+  			</div>
+    </div>
+  			
+    </div>
+    
+     
     <!-- /#wrapper -->
 
     <!-- jQuery -->
