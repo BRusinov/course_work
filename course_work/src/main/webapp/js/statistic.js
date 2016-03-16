@@ -31,7 +31,7 @@ $(document).ready(function() {
     	$('#statistic').modal('toggle');
     	$('#statistic').modal('show');
     	$("#statistic #update").click(function() {
-    		all=$.ajax(playerEndpoint(1), {
+    		var all=$.ajax(playerEndpoint(1), {
         		method: "GET",
         		dataType: "json"
         	}).then(function(response) {
