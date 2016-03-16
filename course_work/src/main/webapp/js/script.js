@@ -1,12 +1,21 @@
 $(document).ready(function() {
     "use strict";
     var PLAYER_ENDPOINT = "http://localhost:3000/Regular_user";
+    var TEAM_ENDPOINT = "http://localhost:3000/Team"; 
     function listAll(){
         return $.ajax(PLAYER_ENDPOINT, {
             method: "GET",
             dataType: "json"
         });
     }
+    
+    function listTeam(){
+        return $.ajax(TEAM_ENDPOINT, {
+            method: "GET",
+            dataType: "json"
+        });
+    }
+    
     function reloadPlayers() {
         listAll().then(function(response) {
             function addPlayer(player) {
@@ -105,6 +114,22 @@ $(document).ready(function() {
 //    	alert("clicked");
     	$('#view').modal('toggle');
     	$('#view').modal('show');
+    	listTeam().then(function(response) {
+			function showDetails(team){
+				$("#team_goals").val(team.scored_goals);
+				$("#team_conceded").val(team.goals_conceded);
+				$("#team_position").val(team.position);
+				$("#champions_league").val(team.participation.Champions_League);
+				$("#cup").val(team.participation.Cup);
+				$("#team_matches").val(team.matches);
+				$("#view #back").click(function() {
+					$("#view").modal('hide');
+				})
+			};
+        $(response).each(function(index, player){
+        		showDetails(player);
+        	});
+        });
 //    	$('#view').modal('hide');
 	})
    
