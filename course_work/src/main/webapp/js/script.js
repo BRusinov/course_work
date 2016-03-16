@@ -40,7 +40,7 @@ $(document).ready(function() {
         
         window.location = $(this).attr("href") + "?" + $.param(object, true);
     });
-    
+
     reloadPlayers();
     $("#new_player").click(function() {
     	$('#add').modal('toggle');
@@ -100,5 +100,12 @@ $(document).ready(function() {
 			name=$("#statistic #scored_goals").val("");
     	});
 	});
+    
+    $("#team_details").click(function() {
+//    	alert("clicked");
+    	$('#view').modal('toggle');
+    	$('#view').modal('show');
+//    	$('#view').modal('hide');
+	})
    
 });
