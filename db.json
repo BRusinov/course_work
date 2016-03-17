@@ -46,12 +46,16 @@
 			"couch_id":1,
 			"username": "penata",
 			"country": "bulgaria",
-			"age": 41
+			"age": 41,
+			"teams": "CSKA Sofia, Ludogorets",
+			"wage": 200,
+			"contract": "01-09-2018"
 			
 		}
 	],
 	"Team": [
 		{
+			"name": "Bayern Munich",
 			"scored_goals": 31,
 			"goals_conceded": 18,
 			"position": 2,
