@@ -56,6 +56,7 @@ $(document).ready(function() {
     	$('#add').modal('show');
     	$("#add #add_player").click(function() {
 			var name=$("#add #name").val();
+			var age=$("#add #age").val();
 			var country=$("#add #country").val();
 			var goals=$("#add #new_goals").val();
 			var assists=$("#add #new_assists").val();
@@ -78,6 +79,7 @@ $(document).ready(function() {
 					"<td><a href='statistic.html' role='button' class='btn btn-warning' id='statistic_player'>View statistic</a></td></tr>");
         	var player = {
     	    	      	username: name,
+    	    	      	age:age,
     	    	      	country:country,
     	    	      	statistics:{
     	    	      		goals:goals,
