@@ -20,6 +20,21 @@ $(document).ready(function() {
             	$("#goals").text(player.statistics.goals);
             	$("#assists").text(player.statistics.assists);
             	$("#minutes").text(player.statistics.minutes);
+            	$("#player_name").text(player.username);
+            	$("#player_age").text(player.age);
+            	$("#player_country").text(player.country);
+            	$("#player_fines").text(player.fines);
+            	$("#player_violations").text(player.violations);
+            	$("#player_matches").text(player.matches);
+            	$("#player_notes").text(player.notes);
+            	$("#player_tasks").text(player.tasks);
+            	$("#player_results").text(player.results);
+            	$("#player_diet").text(player.diet);
+            	$("#player_value").text(player.transfer_value);
+            	$("#player_yellow").text(player.yellow_cards);
+            	$("#player_red").text(player.red_cards);
+            	$("#player_wage").text(player.wage);
+            	$("#player_contract").text(player.contract);
             }
             _.forEach(response, updateStatistics(response));
         });
