@@ -118,21 +118,46 @@ $(document).ready(function() {
     	$('#view').modal('show');
     	listTeam().then(function(response) {
 			function showDetails(team){
+				$("#team_details").attr("team_id", team.id);
 				$("#team_goals").val(team.scored_goals);
 				$("#team_conceded").val(team.goals_conceded);
 				$("#team_position").val(team.position);
 				$("#champions_league").val(team.participation.Champions_League);
 				$("#cup").val(team.participation.Cup);
 				$("#team_matches").val(team.matches);
+
 				$("#view #back").click(function() {
 					$("#view").modal('hide');
+				})
+				$("#view #update").click(function(){
+					var team_goals=$("#team_goals").val();
+					var conceded=$("#team_conceded").val();
+					var position=$("#team_position").val();
+					var league=$("#champions_league").val();
+					var cup=$("#cup").val();
+					var matches=$("#team_matches").val();
+					team.scored_goals=team_goals;
+					team.goals_conceded=conceded;
+					team.position=position;
+					team.participation.Champions_League=league;
+					team.participation.Cup=cup;
+					team.matches=matches;
+					console.log(team);
+					var id=$("#team_details").attr("team_id");
+					$.ajax(TEAM_ENDPOINT+"/"+id, {
+		      			   method: "PUT",
+		      			   dataType: "json",
+		      			   data: JSON.stringify(team),
+		      			   contentType: "application/json; charset=utf-8"
+		         		});
+					$("#view").modal("hide");
+					alert("Updated successfully!");
 				})
 			};
         $(response).each(function(index, player){
         		showDetails(player);
         	});
         });
-//    	$('#view').modal('hide');
 	})
    
 });
