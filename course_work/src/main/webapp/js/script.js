@@ -128,7 +128,7 @@ $(document).ready(function() {
 
 				$("#view #back").click(function() {
 					$("#view").modal('hide');
-				})
+				})	
 				$("#view #update").click(function(){
 					var team_goals=$("#team_goals").val();
 					var conceded=$("#team_conceded").val();
@@ -136,8 +136,10 @@ $(document).ready(function() {
 					var league=$("#champions_league").val();
 					var cup=$("#cup").val();
 					var matches=$("#team_matches").val();
-					team.scored_goals=team_goals;
-					team.goals_conceded=conceded;
+					var results_goals=parseFloat(team_goals)+parseFloat(team.scored_goals);
+					team.scored_goals=results_goals;
+					var results_conceded=parseFloat(conceded)+parseFloat(team.goals_conceded);
+					team.goals_conceded=results_conceded;
 					team.position=position;
 					team.participation.Champions_League=league;
 					team.participation.Cup=cup;
