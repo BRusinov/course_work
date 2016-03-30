@@ -50,13 +50,17 @@ $(document).ready(function() {
         		method: "GET",
         		dataType: "json"
         	}).then(function(response) {
+        		console.log(response);
         		var scored_goals=$("#statistic #scored_goals").val();
         		var made_assists=$("#statistic #made_assists").val();
         		var minutes_played=$("#statistic #minutes_played").val(); 	   	
+        		var new_goals=parseFloat(scored_goals)+parseFloat(response.statistics.goals);
+        		var new_assists=parseFloat(made_assists)+parseFloat(response.statistics.assists)
+        		var new_minutes=parseFloat(minutes_played)+parseFloat(response.statistics.minutes);
         		response.statistics={
-        				goals:scored_goals,
-        				assists:made_assists,
-        				minutes:minutes_played
+        				goals:new_goals,
+        				assists:new_assists,
+        				minutes:new_minutes
         		};
         		$.ajax(playerEndpoint(1), {
       			   method: "PUT",
