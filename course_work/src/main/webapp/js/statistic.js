@@ -1,6 +1,7 @@
 $(document).ready(function() {
     "use strict";
     var PLAYER_ENDPOINT = "http://localhost:3000/Regular_user";
+    var CURRENT_PLAYER_ID;
     function playerEndpoint(playerId) {
 		return PLAYER_ENDPOINT + "/" + playerId;
 	}
@@ -11,11 +12,10 @@ $(document).ready(function() {
         });
     }
     function reloadStatistics() {
-    	var id;
     	if(window.location.href.indexOf("statisticsPlayer") != -1)
-    	      id = window.location.href.substr(window.location.href.indexOf("statisticsPlayer")+"statisticsPlayer".length +1)
+    	      CURRENT_PLAYER_ID = window.location.href.substr(window.location.href.indexOf("statisticsPlayer")+"statisticsPlayer".length +1)
     	else return null;
-        listInformation(id).then(function(response) {
+        listInformation(CURRENT_PLAYER_ID).then(function(response) {
             function updateStatistics(player) {
             	$("#goals").text(player.statistics.goals);
             	$("#assists").text(player.statistics.assists);
@@ -45,8 +45,14 @@ $(document).ready(function() {
     $("#update_statistic").click(function() {
     	$('#statistic').modal('toggle');
     	$('#statistic').modal('show');
+    	$("#statistic #scored_goals").val("0");
+		$("#statistic #made_assists").val("0");
+		$("#statistic #minutes_played").val("0"); 
+		$("#statistic #fines").val("0");
+		$("#statistic #yellow").val("0");
+		$("#statistic #red").val("0");
     	$("#statistic #update").click(function() {
-    		var all=$.ajax(playerEndpoint(1), {
+    		var all=$.ajax(playerEndpoint(CURRENT_PLAYER_ID), {
         		method: "GET",
         		dataType: "json"
         	}).then(function(response) {
@@ -63,18 +69,16 @@ $(document).ready(function() {
         		var new_fines=parseFloat(fines)+parseFloat(response.fines);
         		var new_yellow=parseFloat(yellow)+parseFloat(response.yellow_cards);
         		var new_red=parseFloat(red)+parseFloat(response.red_cards);
+        		response.statistics.goals=new_goals;
         		response.fines=new_fines;
         		response.yellow_cards=new_yellow;
         		response.red_cards=new_red;
-        		alert(response.fines);
-        		alert(response.yellow_cards);
-        		alert(response.red_cards);
         		response.statistics={
         				goals:new_goals,
         				assists:new_assists,
         				minutes:new_minutes
         		};
-        		$.ajax(playerEndpoint(1), {
+        		$.ajax(playerEndpoint(CURRENT_PLAYER_ID), {
       			   method: "PUT",
       			   dataType: "json",
       			   data: JSON.stringify(response),
@@ -84,12 +88,12 @@ $(document).ready(function() {
     			$("#goals").text(response.statistics.goals);
     			$("#assists").text(response.statistics.assists);
     			$("#minutes").text(response.statistics.minutes);
-        		scored_goals=$("#statistic #scored_goals").val("");
-        		made_assists=$("#statistic #made_assists").val("");
-        		minutes_played=$("#statistic #minutes_played").val("");
-        		scored_goals=$("#statistic #scored_goals").val("");
-        		made_assists=$("#statistic #made_assists").val("");
-        		minutes_played=$("#statistic #minutes_played").val("");
+        		scored_goals=$("#statistic #scored_goals").val("0");
+        		made_assists=$("#statistic #made_assists").val("0");
+        		minutes_played=$("#statistic #minutes_played").val("0");
+        		scored_goals=$("#statistic #scored_goals").val("0");
+        		made_assists=$("#statistic #made_assists").val("0");
+        		minutes_played=$("#statistic #minutes_played").val("0");
 			});
 
 		});
