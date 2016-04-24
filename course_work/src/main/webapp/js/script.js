@@ -22,6 +22,7 @@ $(document).ready(function() {
     			$("#table_body").append("<tr><td>"+player.username+"</td><td><a href='comments.html' role='button' class='btn btn-info' id='comments_player' data-playerId="+player.id+">View comments</a></td>" +
     					"<td><a href='tasks.html' role='button' class='btn btn-success' id='tasks_player' data-playerId="+player.id+">View tasks</a></td>" +
     					"<td><a href='statistic.html' role='button' class='btn btn-warning' id='statistic_player' data-playerId="+player.id+">View statistic</a></td></tr>");
+    			
             }
             console.log(response);
             $(response).each(function(index, player){
@@ -65,7 +66,8 @@ $(document).ready(function() {
 			var violations=$("#add #violations").val();
 			var matches=$("#add #matches").val();
 			var notes=$("#add #notes").val();
-			var tasks=$("#add #tasks").val();
+			var tasks_matches=$("#add #tasks_matches").val();
+			var tasks_training=$("#add #tasks_training").val();
 			var results=$("#add #results").val();
 			var diet=$("#add #diet").val();
 			var transfer_value=$("#add #transfer_value").val();
@@ -74,7 +76,7 @@ $(document).ready(function() {
 			var wage=$("#add #wage").val();
 			var contract=$("#add #contract").val();
 			$('#add').modal('hide');
-			$("#table_body").append("<tr><td>"+name+"</td><td><a href='comments.html' role='button' class='btn btn-info' id=comments_player>View comments</a></td>" +
+			$("#table_body").append("<tr><td>"+name+"</td><td><a href='comments.html' role='button' class='btn btn-info' id='comments_player'>View comments</a></td>" +
 					"<td><a href='tasks.html' role='button' class='btn btn-success' id='tasks_player'>View tasks</a></td>" +
 					"<td><a href='statistic.html' role='button' class='btn btn-warning' id='statistic_player'>View statistic</a></td></tr>");
         	var player = {
@@ -90,7 +92,7 @@ $(document).ready(function() {
     	    	      	violations:violations,
     	    	      	matches:matches,
     	    	      	notes:notes,
-    	    	      	tasks:tasks,
+    	    	      	tasks:[tasks_matches,tasks_training],
     	    	      	results:results,
     	    	      	diet:diet,
     	    	      	transfer_value:transfer_value,
@@ -113,53 +115,62 @@ $(document).ready(function() {
 	});
     
     $("#team_details").click(function() {
-//    	alert("clicked");
     	$('#view').modal('toggle');
     	$('#view').modal('show');
     	listTeam().then(function(response) {
 			function showDetails(team){
 				$("#team_details").attr("team_id", team.id);
-				$("#team_goals").val(team.scored_goals);
-				$("#team_conceded").val(team.goals_conceded);
-				$("#team_position").val(team.position);
-				$("#champions_league").val(team.participation.Champions_League);
-				$("#cup").val(team.participation.Cup);
-				$("#team_matches").val(team.matches);
-
-				$("#view #back").click(function() {
-					$("#view").modal('hide');
-				})	
-				$("#view #update").click(function(){
-					var team_goals=$("#team_goals").val();
-					var conceded=$("#team_conceded").val();
-					var position=$("#team_position").val();
-					var league=$("#champions_league").val();
-					var cup=$("#cup").val();
-					var matches=$("#team_matches").val();
-					var results_goals=parseFloat(team_goals)+parseFloat(team.scored_goals);
-					team.scored_goals=results_goals;
-					var results_conceded=parseFloat(conceded)+parseFloat(team.goals_conceded);
-					team.goals_conceded=results_conceded;
-					team.position=position;
-					team.participation.Champions_League=league;
-					team.participation.Cup=cup;
-					team.matches=matches;
-					console.log(team);
-					var id=$("#team_details").attr("team_id");
-					$.ajax(TEAM_ENDPOINT+"/"+id, {
-		      			   method: "PUT",
-		      			   dataType: "json",
-		      			   data: JSON.stringify(team),
-		      			   contentType: "application/json; charset=utf-8"
-		         		});
-					$("#view").modal("hide");
-					alert("Updated successfully!");
-				})
-			};
+				$("#team_goals").text(team.scored_goals);
+				$("#team_conceded").text(team.goals_conceded);
+				$("#team_position").text(team.position);
+				$("#team_champions_league").text(team.participation.Champions_League);
+				$("#team_cup").text(team.participation.Cup);
+				$("#team_matches").text(team.matches);
+				$("#new_team_goals").val("0");
+				$("#new_team_conceded").val("0");
+				$("#new_team_position").val("0");
+				$("#new_champions_league").val("0");
+				$("#new_cup").val("0");
+				$("#new_team_matches").val("0");
+				
+			}
         $(response).each(function(index, player){
         		showDetails(player);
         	});
         });
 	})
    
+	$("#view #update").click(function(){
+		listTeam().then(function(response) {
+			var team=response[0];
+			var team_goals=$("#new_team_goals").val();
+			var conceded=$("#new_team_conceded").val();
+			var position=$("#new_team_position").val();
+			var league=$("#new_champions_league").val();
+			var cup=$("#new_cup").val();
+			var matches=$("#new_team_matches").val();
+			var results_goals=parseFloat(team_goals)+parseFloat(team.scored_goals);
+			team.scored_goals=results_goals;
+			var results_conceded=parseFloat(conceded)+parseFloat(team.goals_conceded);
+			team.goals_conceded=results_conceded;
+			team.position=position;
+			team.participation.Champions_League=league;
+			team.participation.Cup=cup;
+			team.matches=matches;
+			console.log(team);
+			var id=$("#team_details").attr("team_id");
+			$.ajax(TEAM_ENDPOINT+"/"+id, {
+	  			   method: "PUT",
+	  			   dataType: "json",
+	  			   data: JSON.stringify(team),
+	  			   contentType: "application/json; charset=utf-8"
+	     		});
+		})
+		$("#view").modal("hide");
+		alert("Updated successfully!");
+	})
+	$("#back").click(function() {
+		$("#view").modal('hide');
+	});
+	
 });
