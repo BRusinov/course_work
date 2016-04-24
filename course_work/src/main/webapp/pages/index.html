@@ -54,8 +54,6 @@
                     </a>
                     <ul class="dropdown-menu dropdown-user">
                         <li id="coach"><a href="profile.html" ><i class="fa fa-user fa-fw"></i>Profile</a>
-                    	<li class="divider"></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -164,8 +162,12 @@
 	  						<input type="text" class="form-control" id="notes">
 	  					</p>
 	  					<p>  
-				        	<label>Tasks:</label>
-	  						<textarea class="form-control" rows="5" id="tasks"></textarea>
+				        	<label>Task for matches:</label>
+	  						<input type="text" class="form-control" id="tasks_matches"></input>
+	  					</p>
+	  					<p>  
+				        	<label>Task for training:</label>
+	  						<input type="text" class="form-control" id="tasks_training"></input>
 	  					</p>
 	  					<p>  
 				        	<label>Results:</label>
@@ -214,29 +216,51 @@
 				        <h4 class="modal-title">Team statistics</h4>
 				      </div>
 				      <div class="modal-body">
+						<table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                    <thead>
+                                        <tr>
+                                            <th>Goals</th>
+                                            <th>Goals conceded</th>
+                                            <th>Position</th>
+                                            <th>Champions league</th>
+                                            <th>Cup</th>
+                                            <th>Matches</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="odd gradeX">
+                                            <td id="team_goals"></td>
+                                            <td id="team_conceded"></td>
+                                            <td id="team_position"></td>
+                                            <td id="team_champions_league"></td>
+                                            <td id="team_cup"></td>
+                                            <td id="team_matches"></td>
+                                        </tr>
+                               		</tbody>
+                          </table>
 				        <p>  
-				        	<label>Scored goals:</label>
-	  						<input type="text" class="form-control" id="team_goals">
+				        	<label>New scored goals:</label>
+	  						<input type="text" class="form-control" id="new_team_goals">
 	  					</p>
 	  					<p>  
-				        	<label>Goals conceded:</label>
-	  						<input type="text" class="form-control" id="team_conceded">
+				        	<label>New goals conceded:</label>
+	  						<input type="text" class="form-control" id="new_team_conceded">
 	  					</p>				        
 	  					<p>  
-				        	<label>League position:</label>
-	  						<input type="text" class="form-control" id="team_position">
+				        	<label>New league position:</label>
+	  						<input type="text" class="form-control" id="new_team_position">
 	  					</p>
 	  					<p>  
-				        	<label>Champions league:</label>
-	  						<input type="text" class="form-control" id="champions_league">
+				        	<label>New champions league place:</label>
+	  						<input type="text" class="form-control" id="new_champions_league">
 	  					</p>
 	  					<p>  
-				        	<label>Cup:</label>
-	  						<input type="text" class="form-control" id="cup">
+				        	<label>New cup place:</label>
+	  						<input type="text" class="form-control" id="new_cup">
 	  					</p>
 	  					<p>  
-				        	<label>Matches:</label>
-	  						<textarea class="form-control" rows="3" id="team_matches"></textarea>
+				        	<label>New match:</label>
+	  						<textarea class="form-control" rows="3" id="new_team_matches"></textarea>
 	  					</p>					
 				      </div>
 				      <div class="modal-footer">
