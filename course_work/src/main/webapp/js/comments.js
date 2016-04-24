@@ -1,6 +1,7 @@
 $(document).ready(function() {
     "use strict";
     var PLAYER_ENDPOINT = "http://localhost:3000/Regular_user";
+    var CURRENT_PLAYER_ID;
     function playerEndpoint(playerId) {
 		return PLAYER_ENDPOINT + "/" + playerId;
 	}
@@ -12,11 +13,10 @@ $(document).ready(function() {
         });
     }
     function reloadComments() {
-    	var id;
     	if(window.location.href.indexOf("commentsPlayer") != -1)
-    	      id = window.location.href.substr(window.location.href.indexOf("commentsPlayer")+"commentsPlayer".length +1)
+    	      CURRENT_PLAYER_ID = window.location.href.substr(window.location.href.indexOf("commentsPlayer")+"commentsPlayer".length +1)
     	else return null;
-        listInformation(id).then(function(response) {
+        listInformation(CURRENT_PLAYER_ID).then(function(response) {
             function addComment(player) {
             	$("#new_ones").text(player.notes);
             }
@@ -30,7 +30,7 @@ $(document).ready(function() {
     	$('#myModal').modal('toggle');
     	$('#myModal').modal('show');
     	$("#myModal #save_comment").click(function() {
-    		all=$.ajax(playerEndpoint(1), {
+    		all=$.ajax(playerEndpoint(CURRENT_PLAYER_ID), {
         		method: "GET",
         		dataType: "json"
         	}).then(function(response) {
@@ -39,8 +39,7 @@ $(document).ready(function() {
         		$('#myModal').modal('hide');
     			new_comment=$("#myModal #comment").val("");
     			$("#new_ones").text(response.notes);
-        		console.log(response);
-        		$.ajax(playerEndpoint(1), {
+        		$.ajax(playerEndpoint(CURRENT_PLAYER_ID), {
      			   method: "PUT",
      			   dataType: "json",
      			   data: JSON.stringify(response),
