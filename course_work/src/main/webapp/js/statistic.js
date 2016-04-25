@@ -28,7 +28,6 @@ $(document).ready(function() {
             	$("#player_age").text(player.age);
             	$("#player_country").text(player.country);
             	$("#player_violations").text(player.violations);
-            	$("#player_matches").text(player.matches);
             	$("#player_notes").text(player.notes);
             	$("#player_tasks").text(player.tasks);
             	$("#player_results").text(player.results);
