@@ -23,6 +23,7 @@ $(document).ready(function() {
             	$("#fines").text(player.fines);
             	$("#yellow").text(player.yellow_cards);
             	$("#red").text(player.red_cards);
+            	$("#matches").text(player.matches);
             	$("#player_name").text(player.username);
             	$("#player_age").text(player.age);
             	$("#player_country").text(player.country);
@@ -51,6 +52,7 @@ $(document).ready(function() {
 		$("#statistic #fines").val("0");
 		$("#statistic #yellow").val("0");
 		$("#statistic #red").val("0");
+		$("#statistic #matches").val("0");
     	$("#statistic #update").click(function() {
     		var all=$.ajax(playerEndpoint(CURRENT_PLAYER_ID), {
         		method: "GET",
@@ -63,6 +65,7 @@ $(document).ready(function() {
         		var fines=$("#statistic #fines").val();
         		var yellow=$("#statistic #yellow").val();
         		var red=$("#statistic #red").val();
+        		var matches=$("#statistic #matches").val();
         		var new_goals=parseFloat(scored_goals)+parseFloat(response.statistics.goals);
         		var new_assists=parseFloat(made_assists)+parseFloat(response.statistics.assists)
         		var new_minutes=parseFloat(minutes_played)+parseFloat(response.statistics.minutes);
@@ -73,6 +76,7 @@ $(document).ready(function() {
         		response.fines=new_fines;
         		response.yellow_cards=new_yellow;
         		response.red_cards=new_red;
+        		response.matches=matches;
         		response.statistics={
         				goals:new_goals,
         				assists:new_assists,
